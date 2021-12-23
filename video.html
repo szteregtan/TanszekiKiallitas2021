@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="renderer" content="webkit">
+    <meta name="Software-Name" content="Jietusoft">
+    <title>全景单页面案例</title>
+    <meta name="Description" content="">
+    <!--引入引导js 动态下载播放器-->
+    <script type="text/javascript" src="assets/jsvto/player/UtoVRPlayerGuide.js"></script>
+    <script type="text/javascript" src="assets/jsvto/player/UtoVRPlayerExtend.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background-color: gray;
+        }
+
+    </style>
+    <!--<script src="https://johnson2heng.github.io/vConsole/dist/vconsole.min.js"></script>
+    <script>
+        // init vConsole
+        var vConsole = new VConsole();
+        console.log('Hello world');
+    </script>-->
+</head>
+
+<body>
+<div style="position:relative;width: 100%;height: 100%;">
+    <div style="position:relative;width: 100%;height: 100%; overflow: hidden;" id="pano"></div>
+</div>
+</body>
+<script type="text/javascript">
+    var dop = new Dop();
+    var localData = {
+        "loginUserID":11, //用户名id，大于零，int
+        "title": "这是一个漫游标题",
+        button:{
+            phone:{
+                gyroscope:true
+            }
+        },
+        params:{
+            "name": "SceneViewer",
+            "dragDirectionMode": true,
+            //isGyro:true,
+            scenesArr:[
+                {
+                    "sceneId": "v1",
+                    "sceneName": "个浮点了看价格啥都法索多",
+                    /*"sceneFilePath": "./video/4k3M.mp4",*/
+                    "sceneSpeed": 1,
+                    "sceneType": "Video",
+                    "isLittlePlanetEffect":false,
+                    "thumbnail": "./image/test.jpg",
+                    "initPan": 100,
+                    "initTilt": 0,
+                    "initFov": 90
+                }
+            ]
+        },
+        leftClick:{can_hide_tool:false},
+        hot:{type:false},
+        map:{type:false},
+
+        logo: {type: false},
+        menu: {type: false},
+        sceneText: {type: false},
+        thumbnail: {type: false},
+        nav: {type: false},
+        rightSide: {type: false},
+        autoRotate: {type: false}
+    };
+
+    /*初始化开始*/
+    window.onload = function () {
+        var path = dop.getQueryString('video');
+        if(path){
+            localData.params.scenesArr[0].sceneFilePath = path;
+            const player = initPlayer(localData);
+        }
+        else{
+            console.log('无法通过地址获取到视频');
+        }
+    }
+</script>
+
+</html>
